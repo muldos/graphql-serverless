@@ -36,6 +36,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Package third-parties layer
         run: |
-          zip -r ./dist/third-parties-layer.zip ./dist/layer/python
-          zipinfo -1 ./dist/third-parties-layer.zip
+          cd ./dist/layer/
+          zip -r ../../third-parties-layer.zip ./python
+          zipinfo -1 ../third-parties-layer.zip
 
