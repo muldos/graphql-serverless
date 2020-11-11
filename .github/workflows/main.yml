@@ -34,6 +34,8 @@ jobs:
           python -m pip install -r requirements.txt \
           -t ./dist/layer/python/lib/python${{ matrix.python-version }}/site-packages
       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: ls -al
+      - name: Package third-parties layer
+        run: |
+          zip -r ./dist/third-parties-layer.zip ./dist/layer/python
+          zipinfo -1 ./dist/third-parties-layer.zip
 
