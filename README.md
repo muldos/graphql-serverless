@@ -1,0 +1,1 @@
+python -m pip install -r requirements.txt -t .\dist\layer\python\lib\python3.8\site-packages
