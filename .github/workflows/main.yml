@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Deploy app to AWS
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8]
+        python-version: [3.8]
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -28,6 +28,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Install third-parties modules
+        run: |
+          mkdir -p ./dist/layer/python/lib/python${{ matrix.python-version }}/site-packages
+          python -m pip install -r requirements.txt \
+          -t ./dist/layer/python/lib/python${{ matrix.python-version }}/site-packages
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: ls -al
