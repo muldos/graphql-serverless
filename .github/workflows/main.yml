@@ -1,42 +1,34 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Deploy app to AWS
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
+# triggers
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
   workflow_dispatch:
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# jobs
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.8]
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install third-parties modules
+      - name: Install third-parties modules with pip
         run: |
           mkdir -p ./dist/layer/python/lib/python${{ matrix.python-version }}/site-packages
           python -m pip install -r requirements.txt \
           -t ./dist/layer/python/lib/python${{ matrix.python-version }}/site-packages
-      # Runs a single command using the runners shell
       - name: Package third-parties layer
         run: |
           cd ./dist/layer/
           zip -r ../../third-parties-layer.zip ./python
-          zipinfo -1 ../third-parties-layer.zip
+          zipinfo -1 ../../third-parties-layer.zip
 
