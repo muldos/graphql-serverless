@@ -1,1 +1,1 @@
-python -m pip install -r requirements.txt -t .\dist\layer\python\lib\python3.8\site-packages
+![Deploy app to AWS](https://github.com/muldos/graphql-serverless/workflows/Deploy%20app%20to%20AWS/badge.svg)
