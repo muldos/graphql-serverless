@@ -13,12 +13,14 @@ jobs:
     runs-on: ubuntu-latest 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2         
+        uses: actions/checkout@v2
+      - name: Init step
+        run: 'mkdir -p dist/layer/python/lib/python3.8/site-packages'
       - name: CDK Synth
         uses: muldos/aws-cdk-action-for-python-project@master
         with:
-          python_build_command: ''
-          zip_command: 'zip -r ./dist/layer/third-parties-layer.zip ./dist/layer/python'
+          python_build_command: 'python -m pip install -r requirements.txt -t dist/layer/python/lib/python3.8/site-packages'
+          zip_command: 'zip -r dist/layer/third-parties-layer.zip dist/layer/python'
           cdk_command: 'npx cdk synth'
           cdk_work_dir: 'deploy'
         env:
