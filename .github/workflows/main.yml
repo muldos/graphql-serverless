@@ -21,19 +21,10 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install third-parties modules with pip
-        run: |
-          mkdir -p ./dist/layer/python/lib/python${{ matrix.python-version }}/site-packages
-          python -m pip install -r requirements.txt \
-          -t ./dist/layer/python/lib/python${{ matrix.python-version }}/site-packages
-      - name: Package third-parties layer
-        run: |
-          cd ./dist/layer/
-          zip -r ../../third-parties-layer.zip ./python
-    - name: CDK Synth
-      uses: muldos/github-action-aws-cdk-amazonlinux@master
-      with:
-        args: synth
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}      
+      - name: CDK Synth
+        uses: muldos/github-action-aws-cdk-amazonlinux@master
+        with:
+          args: synth
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
