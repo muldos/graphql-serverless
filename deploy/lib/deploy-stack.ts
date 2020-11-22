@@ -5,7 +5,7 @@ export class FlaskApiStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
     const layer = new lambda.LayerVersion(this, 'FlaskLayer', {
-      code: lambda.Code.fromAsset(path.join(__dirname, 'flask-layer'), {
+      code: lambda.Code.fromAsset(path.join(__dirname, '../flask-layer'), {
         bundling: {
           image: lambda.Runtime.PYTHON_3_8.bundlingDockerImage,
           command: [
@@ -20,6 +20,5 @@ export class FlaskApiStack extends cdk.Stack {
       license: 'Apache-2.0',
       description: 'Third party layer for the flask graphql app',
     });
-    // The code that defines your stack goes here
   }
 }
