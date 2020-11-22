@@ -10,31 +10,17 @@ on:
 # jobs
 jobs:
   build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.8]    
+    runs-on: ubuntu-latest 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install third-parties modules with pip
-        run: |
-          mkdir -p ./dist/layer/python/lib/python${{ matrix.python-version }}/site-packages
-          python -m pip install -r requirements.txt \
-          -t ./dist/layer/python/lib/python${{ matrix.python-version }}/site-packages
-      - name: Package third-parties layer
-        run: |
-          cd ./dist/layer/
-          zip -r ./third-parties-layer.zip ./python
+        uses: actions/checkout@v2         
       - name: CDK Synth
         uses: muldos/github-action-aws-cdk-amazonlinux@master
         with:
+          python_build_command: ''
+          zip_command: 'zip -r ./dist/layer/third-parties-layer.zip ./dist/layer/python'
           cdk_command: 'npx cdk synth'
-          working_dir: 'deploy'
+          cdk_work_dir: 'deploy'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
