@@ -9,10 +9,8 @@ export class FlaskApiStack extends cdk.Stack {
         bundling: {
           image: lambda.Runtime.PYTHON_3_8.bundlingDockerImage,
           command: [
-            'bash', '-c', `
-             pip install -r requirements.txt -t /asset-output &&
-             cp -au . /asset-output
-            `,
+            'bash', '-c', 
+            `pip install -r /asset-input/requirements.txt -t /asset-output`,
           ],
         },
       }),
