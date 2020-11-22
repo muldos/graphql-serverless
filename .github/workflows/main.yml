@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2         
       - name: CDK Synth
-        uses: muldos/github-action-aws-cdk-amazonlinux@master
+        uses: muldos/aws-cdk-action-for-python-project@master
         with:
           python_build_command: ''
           zip_command: 'zip -r ./dist/layer/third-parties-layer.zip ./dist/layer/python'
