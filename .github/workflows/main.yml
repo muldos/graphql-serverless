@@ -30,5 +30,4 @@ jobs:
         run: |
           cd ./dist/layer/
           zip -r ../../third-parties-layer.zip ./python
-          zipinfo -1 ../../third-parties-layer.zip
 
