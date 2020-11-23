@@ -1,0 +1,28 @@
+name: Delete stack
+
+# triggers
+on:
+#  push:
+#    branches: [ master ]
+#  pull_request:
+#    branches: [ master ]
+  workflow_dispatch:
+# jobs
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: CDK Destroy
+        uses: muldos/aws-cdk-action-for-python-project@master
+        with:
+          python_build_command: 'python -V'
+          zip_command: 'zip --help'
+          cdk_command: "npx cdk destroy --require-approval never"
+          cdk_work_dir: 'deploy'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: 'eu-west-1'
