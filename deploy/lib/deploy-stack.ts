@@ -5,9 +5,8 @@ import * as child from 'child_process';
 export class FlaskApiStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-    const layerFolder = path.join(__dirname, '../../dist/layer/python/lib/python3.8/site-packages');
     const layer = new lambda.LayerVersion(this, 'FlaskLayer', {
-      code: lambda.Code.fromAsset(path.join(__dirname, '../../dist/layer/'), {
+      code: lambda.Code.fromAsset(path.join(__dirname, '../../'), {
           bundling: {
             local: {
               tryBundle(outputDir: string, options: cdk.BundlingOptions) {
@@ -16,14 +15,14 @@ export class FlaskApiStack extends cdk.Stack {
                   } catch {
                     return false;
                   }
-                  child.spawnSync(`pip3 install -r ${path.join(__dirname,'../../requirements.txt')} -t ${layerFolder}`);
+                  child.spawnSync(`pip3 install -r requirements.txt -t ${path.join(outputDir, 'python/lib/python3.8/site-packages')}`);
                   return true;
                 }
             },            
             image: lambda.Runtime.PYTHON_3_8.bundlingDockerImage,
             command: [
               'bash', '-c', `
-               pip3 install -r ${path.join(__dirname,'../../requirements.txt')} -t /asset-output &&
+               pip3 install -r requirements.txt -t /asset-output &&
                cp -au . /asset-output
               `,
             ],
