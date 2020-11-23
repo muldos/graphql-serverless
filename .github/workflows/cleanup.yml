@@ -18,8 +18,8 @@ jobs:
       - name: CDK Destroy
         uses: muldos/aws-cdk-action-for-python-project@master
         with:
-          python_build_command: 'python -V'
-          zip_command: 'zip --help'
+          python_build_command: 'python3 -V'
+          zip_command: 'touch dist/layer/third-parties-layer.zip'
           cdk_command: "npx cdk destroy --require-approval never"
           cdk_work_dir: 'deploy'
         env:
