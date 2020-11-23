@@ -21,7 +21,7 @@ jobs:
         with:
           python_build_command: 'pip3 install -r requirements.txt -t dist/layer/python/lib/python3.8/site-packages'
           zip_command: 'zip -r dist/layer/third-parties-layer.zip dist/layer/python'
-          cdk_command: "npx cdk deploy"
+          cdk_command: "npx cdk deploy --require-approval never"
           cdk_work_dir: 'deploy'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
