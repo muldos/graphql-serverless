@@ -14,7 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
+      - name: Init step
+        run: 'mkdir -p dist/layer/'
       - name: CDK Destroy
         uses: muldos/aws-cdk-action-for-python-project@master
         with:
