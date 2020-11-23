@@ -1,4 +1,4 @@
-name: Build layer
+name: Deploy Stack
 
 # triggers
 on:
@@ -20,7 +20,7 @@ jobs:
         uses: muldos/aws-cdk-action-for-python-project@master
         with:
           python_build_command: 'pip3 install -r requirements.txt -t dist/layer/python/lib/python3.8/site-packages'
-          zip_command: 'cd dist/layer; zip -r ../third-parties-layer.zip python'
+          zip_command: 'cd dist/layer; zip -r third-parties-layer.zip python'
           cdk_command: "npx cdk deploy --require-approval never"
           cdk_work_dir: 'deploy'
         env:
