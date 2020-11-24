@@ -1,12 +1,8 @@
 from flask import Flask, url_for
 from flask import current_app as app
+from flask_graphql import GraphQLView
+from .graphql_schema import schema
 
 
-@app.route("/")
-def home():
-    return "hello from flask serverless"
+app.add_url_rule('/graphql', view_func=GraphQLView.as_view('graphql', schema=schema, graphiql=True))
 
-
-@app.route("/page")
-def page():
-    return url_for("static", filename="test.html")
