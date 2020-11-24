@@ -16,6 +16,9 @@ export class FlaskApiStack extends cdk.Stack {
       runtime: lambda.Runtime.PYTHON_3_8,
       functionName: 'lb-flaskapp-wrapper',
       code: lambda.Code.fromAsset(path.join(__dirname, '../../flask_app')),
+      environment: {
+        stage_mount_point: '/public'
+      },
       layers: [layer],
       handler: 'aws_wsgi_middleware.lambda_handler'
     });  
