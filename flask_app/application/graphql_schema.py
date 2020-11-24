@@ -8,6 +8,7 @@ class Episode(graphene.Enum):
     EMPIRE = 5
     JEDI = 6
 
+
 class Character(graphene.Interface):
     id = graphene.ID()
     name = graphene.String()
