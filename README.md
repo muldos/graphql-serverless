@@ -13,7 +13,7 @@ flask run
 ```
 ### Linux
 ```shell
-./venv/Scripts/activate
+./venv/bin/activate
 cd flask_app
 export FLASK_APP=application
 flask run
