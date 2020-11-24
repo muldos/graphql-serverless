@@ -1,4 +1,4 @@
-name: Autoint
+name: Autolint
 
 on: [push, pull_request]
 
