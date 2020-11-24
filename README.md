@@ -1,7 +1,7 @@
 # Flask Serverless Skeleton
 
-Flask app that can be run locally or serverless in the cloud (AWS).
-
+GraphQL Flask app that can be run locally or serverless in the cloud (AWS).
+Implements the "Star wars" example of the [Official GraphQL.org](https://graphql.org/)
 
 ## Local startup
 ### Windows
@@ -18,6 +18,18 @@ cd flask_app
 export FLASK_APP=application
 flask run
 ```
+
+Then go to http://localhost:5000/graphql
+and try for example
+```graphql
+{
+  human(id: "1000") {
+    name
+    appearsIn
+  }
+}
+```
+
 ## Cloud deployment
 Use the provided deploy / cleanup workflows
 
