@@ -1,5 +1,7 @@
 from apig_wsgi import make_lambda_handler
-from graphql_app import app
+from application import create_app
+
+app = create_app()
 
 
 def proxied_app(environ, start_response):
